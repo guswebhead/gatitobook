@@ -1,0 +1,43 @@
+<h4 class="text-center">Registre-se e mostre seu pet ao mundo!</h4>
+
+<form action="" class="formm mt-4" [formGroup]="novoUsuarioForm" (submit)="register()">
+
+  <div class="form-group">
+    <input type="text" placeholder="E-mail" class="form-control" formControlName="email">
+    <app-mensagem *ngIf="novoUsuarioForm.get('email')?.errors?.['required']
+         && novoUsuarioForm.get('email')?.touched" mensagem="email obrigatório">
+    </app-mensagem>
+    <app-mensagem *ngIf="novoUsuarioForm.get('email')?.errors?.['email']
+    && novoUsuarioForm.get('email')?.touched" mensagem="Email no formato incorreto">
+    </app-mensagem>
+  </div>
+
+  <div class="form-group">
+    <input type="text" placeholder="Nome completo" class="form-control" formControlName="fullName">
+    <app-mensagem *ngIf="novoUsuarioForm.get('fullName')?.errors
+    && novoUsuarioForm.get('fullName')?.touched" mensagem="nome incorreto">
+    </app-mensagem>
+  </div>
+
+  <div class="form-group">
+    <input type="text" placeholder="Usuario" class="form-control" formControlName="userName">
+    <app-mensagem *ngIf="novoUsuarioForm.get('userName')?.errors?.['minusculo']
+    && novoUsuarioForm.get('userName')?.touched" mensagem="Apenas letras minusculas">
+    </app-mensagem>
+    <app-mensagem *ngIf="novoUsuarioForm.get('userName')?.errors?.['usuarioExistente']" mensagem="usuario ja existente">
+    </app-mensagem>
+  </div>
+
+  <div class="form-group">
+    <input type="password" placeholder="Senha" class="form-control" formControlName="password">
+    <app-mensagem *ngIf="novoUsuarioForm.errors?.['senhaIgualUsuario']" mensagem="Senha deve ser diferente do usuário">
+    </app-mensagem>
+  </div>
+
+  <button class="btn btn-primary btn-block">
+    Cadastrar
+  </button>
+
+</form>
+
+<p>Possui uma conta? <a [routerLink]="['']">Faça login</a></p>
