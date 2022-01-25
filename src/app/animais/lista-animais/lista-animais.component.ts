@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { switchMap, Observable } from 'rxjs';
 import { AnimaisService } from './../animais.service';
 import { UsuarioService } from './../../autenticacao/usuario/usuario.service';
@@ -11,22 +12,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaAnimaisComponent implements OnInit {
 
-  animais$!: Observable<Animais>
+  animais!: Animais
 
   constructor(
-    private userService: UsuarioService,
-    private animaisService: AnimaisService
+    private activedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.animais$ = this.userService.returnUser().pipe(
-      switchMap(
-        (user)=>{
-          let userName = user.name ?? '';
-          return this.animaisService.listUser(userName);
-        }
-      )
-    )
-
+    this.activedRoute.params.subscribe(params =>{
+      this.animais = this.activedRoute.snapshot.data['animais'];
+    })
   }
 }

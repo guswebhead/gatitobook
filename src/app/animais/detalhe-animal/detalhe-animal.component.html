@@ -8,10 +8,14 @@
     <div class="col-lg-4">
       <small class="text-left break-word">
         <p>{{animal.description}}</p>
-        <i (click)="like()" class="fa fa-heart-o fa-2x mr-2 pull-left">{{animal.likes}}</i>
-        <i class="fa fa-comment-o fa-2x mr-2 ml-2">{{animal.comments}}</i>
-        <i (click)="delete()" class="fa fa-trash-o fa-2x pull-right"></i>
+        <em (click)="like()" class="fa fa-heart-o fa-2x mr-2 pull-left">{{animal.likes}}</em>
+        <em class="fa fa-comment-o fa-2x mr-2 ml-2">{{animal.comments}}</em>
+        <em (click)="delete()" class="fa fa-trash-o fa-2x pull-right"></em>
       </small>
+      <app-comentarios [id]="animalId" *ngIf="animal.allowComments; else warning"></app-comentarios>
+      <ng-template #warning>
+        <p>Usuário não pode comentar</p>
+      </ng-template>
     </div>
   </div>
 </div>
