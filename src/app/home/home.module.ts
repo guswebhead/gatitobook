@@ -1,10 +1,8 @@
-import { SharedModule } from './../shared/shared.module';
-import { MensagemModule } from './../componentes/mensagem/mensagem.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
-import { MensagemComponent } from './../componentes/mensagem/mensagem.component';
+import { SharedModule } from './../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { LoginComponent } from './login/login.component';

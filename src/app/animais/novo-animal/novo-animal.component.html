@@ -1,0 +1,19 @@
+<div class="container">
+  <form [formGroup]="formAnimal" class="row" (submit)="upload()">
+    <div class="col-md-6 text-center">
+      <div class="form-group" *ngIf="!preview; else previewImage">
+        <button type="button" (click)="fileInput.click()" class="btn btn-primary">
+          <em class="fa fa-image fa-4x align-middle"></em>
+        </button>
+        <input #fileInput type="file" hidden formControlName="file" accept="image/*"
+          (change)="holdArchive($event.target)">
+      </div>
+      <app-mensagem mensagem="Por favor selecione a foto" *ngIf="!!formAnimal.get('file')?.errors?.['maxLength']">
+      </app-mensagem>
+    </div>
+
+    <ng-template #previewImage>
+      <app-animal [url]="preview" title="Preview"></app-animal>
+    </ng-template>
+  </form>
+</div>
