@@ -1,6 +1,9 @@
 <div class="container">
+
   <form [formGroup]="formAnimal" class="row" (submit)="upload()">
+
     <div class="col-md-6 text-center">
+
       <div class="form-group" *ngIf="!preview; else previewImage">
         <button type="button" (click)="fileInput.click()" class="btn btn-primary">
           <em class="fa fa-image fa-4x align-middle"></em>
@@ -8,12 +11,43 @@
         <input #fileInput type="file" hidden formControlName="file" accept="image/*"
           (change)="holdArchive($event.target)">
       </div>
-      <app-mensagem mensagem="Por favor selecione a foto" *ngIf="!!formAnimal.get('file')?.errors?.['maxLength']">
+
+      <app-mensagem mensagem="Por favor selecione a foto" *ngIf="!!formAnimal.get('file')?.errors?.['required']">
       </app-mensagem>
+
     </div>
 
     <ng-template #previewImage>
       <app-animal [url]="preview" title="Preview"></app-animal>
     </ng-template>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <textarea formControlName="description" placeholder="Descrição do animal" class="form-control form-control-sm">
+        </textarea>
+        <app-mensagem mensagem="tamanho maximo do campo 300 caracteres"
+          *ngIf="!!formAnimal.get('description')?.errors?.['maxLength']"></app-mensagem>
+      </div>
+
+      <div class="form-group">
+        <label class="text-muted">
+          Permite comentario
+          <input type="checkbox" formControlName="allowComments">
+        </label>
+      </div>
+
+      <div *ngIf="!percentConcluido; else uploaddiv">
+        <button class="btn btn-primary btn-block" [disabled]="formAnimal.invalid" type="submit">
+          Enviar
+        </button>
+        <a routerLink="['animais']" class="btn btn-secondary btn-block">Cancelar</a>
+      </div>
+
+      <ng-template #uploaddiv>
+        <div class="text-center display-4">
+          Percentual de upload {{percentConcluido}}%
+        </div>
+      </ng-template>
+    </div>
   </form>
 </div>
